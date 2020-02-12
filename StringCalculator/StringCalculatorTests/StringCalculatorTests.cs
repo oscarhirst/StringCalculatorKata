@@ -43,9 +43,9 @@ namespace StringCalculatorTests
         [TestCase(1, 5)]
         [TestCase(6, 32)]
         [TestCase(9020, 223)]
-        public void Calculate_GivenSingleNumber_ReturnsInput(int input1, int input2)
+        public void Calculate_GivenTwoCommaSeparatedNumbers_ReturnsSum(int input1, int input2)
         {
-            Assert.AreEqual(input1 * input2, _calculator.Calculate($"{input1},{input2}"));
+            Assert.AreEqual(input1 + input2, _calculator.Calculate($"{input1},{input2}"));
         }
     }
 }

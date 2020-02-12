@@ -19,28 +19,21 @@ namespace StringCalculator
             }
 
             // req2
-            if (int.TryParse(input, out var number))
+            if (int.TryParse(input, out var singleNumber))
             {
-                return number;
+                return singleNumber;
             }
 
             // req 3
-            var inputs = input.Split(',');
-
-            // var numbers = input.Split(',').Select(n =>
-            // {
-            //    if (!int.TryParse(n, out var number))
-            //    {
-            //        throw new InvalidOperationException();
-            //    }
-            //    return number;
-            // });
-            if (!int.TryParse(inputs[0], out var number1) || !int.TryParse(inputs[1], out var number2))
+            return input.Split(',').Select(n =>
             {
-                throw new InvalidOperationException();
-            }
+                if (!int.TryParse(n, out var number))
+                {
+                    throw new InvalidOperationException();
+                }
 
-            return number1 * number2;
+                return number;
+            }).Sum();
         }
     }
 }
