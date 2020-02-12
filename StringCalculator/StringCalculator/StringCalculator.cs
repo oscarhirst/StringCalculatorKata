@@ -6,5 +6,6 @@ namespace StringCalculator
 {
     public class StringCalculator
     {
+        public int Calculate(string input) => 0;
     }
 }

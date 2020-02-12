@@ -5,18 +5,22 @@
 namespace StringCalculatorTests
 {
     using NUnit.Framework;
+    using StringCalculator;
 
     public class StringCalculatorTests
     {
+        private StringCalculator _calculator;
+
         [SetUp]
         public void Setup()
         {
+            _calculator = new StringCalculator();
         }
 
         [Test]
-        public void Test1()
+        public void Calculate_GivenEmptyString_Returns0()
         {
-            Assert.Pass();
+            Assert.AreEqual(0, _calculator.Calculate(string.Empty));
         }
     }
 }
