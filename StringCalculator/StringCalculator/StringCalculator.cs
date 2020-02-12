@@ -25,7 +25,26 @@ namespace StringCalculator
             }
 
             // req 3
-            return input.Split(',').Select(n =>
+            if (input.Contains(","))
+            {
+                var commaSeparatedNumbers = input.Split(',').Select(n =>
+                {
+                    if (!int.TryParse(n, out var number))
+                    {
+                        throw new InvalidOperationException();
+                    }
+
+                    return number;
+                });
+
+                if (commaSeparatedNumbers?.Any() ?? false)
+                {
+                    return commaSeparatedNumbers.Sum();
+                }
+            }
+
+            // req 4
+            return input.Split(new string[] { Environment.NewLine }, StringSplitOptions.None).Select(n =>
             {
                 if (!int.TryParse(n, out var number))
                 {

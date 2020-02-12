@@ -47,5 +47,13 @@ namespace StringCalculatorTests
         {
             Assert.AreEqual(input1 + input2, _calculator.Calculate($"{input1},{input2}"));
         }
+
+        [TestCase(1, 5)]
+        [TestCase(6, 32)]
+        [TestCase(9020, 223)]
+        public void Calculate_GivenTwoNewLineSeparatedNumbers_ReturnsSum(int input1, int input2)
+        {
+            Assert.AreEqual(input1 + input2, _calculator.Calculate($"{input1}{Environment.NewLine}{input2}"));
+        }
     }
 }
