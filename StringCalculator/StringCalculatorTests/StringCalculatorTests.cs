@@ -1,13 +1,12 @@
-// <copyright file="BowlingTests.cs" company="Corsham Science">
+// <copyright file="StringCalculatorTests.cs" company="Corsham Science">
 // Copyright (c) Corsham Science. All rights reserved.
 // </copyright>
 
-namespace Bowling.Tests
+namespace StringCalculatorTests
 {
     using NUnit.Framework;
 
-    [TestFixture]
-    public class BowlingTests
+    public class StringCalculatorTests
     {
         [SetUp]
         public void Setup()
