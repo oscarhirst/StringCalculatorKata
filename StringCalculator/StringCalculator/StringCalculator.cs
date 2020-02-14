@@ -24,35 +24,32 @@ namespace StringCalculator
                 return singleNumber;
             }
 
-            // req 3
+            // req 3, 4 & 5
+            string separator = null;
             if (input.Contains(","))
             {
-                var commaSeparatedNumbers = input.Split(',').Select(n =>
-                {
-                    if (!int.TryParse(n, out var number))
-                    {
-                        throw new InvalidOperationException();
-                    }
-
-                    return number;
-                });
-
-                if (commaSeparatedNumbers?.Any() ?? false)
-                {
-                    return commaSeparatedNumbers.Sum();
-                }
+                separator = ",";
+            }
+            else if (input.Contains(Environment.NewLine))
+            {
+                separator = Environment.NewLine;
             }
 
-            // req 4
-            return input.Split(new string[] { Environment.NewLine }, StringSplitOptions.None).Select(n =>
+            if (separator != null)
             {
-                if (!int.TryParse(n, out var number))
-                {
-                    throw new InvalidOperationException();
-                }
+                return input.Split(new string[] { separator }, StringSplitOptions.None)
+                    .Select(n =>
+                    {
+                        if (!int.TryParse(n, out var number))
+                        {
+                            throw new InvalidOperationException();
+                        }
 
-                return number;
-            }).Sum();
+                        return number;
+                    }).Sum();
+            }
+
+            throw new InvalidOperationException();
         }
     }
 }
