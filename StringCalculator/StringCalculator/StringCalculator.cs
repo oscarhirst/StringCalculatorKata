@@ -3,8 +3,6 @@
 // </copyright>
 // based on exercise http://www.peterprovost.org/blog/2012/05/02/kata-the-only-way-to-learn-tdd/
 
-using System.Net.Cache;
-
 namespace StringCalculator
 {
     using System;
@@ -21,9 +19,9 @@ namespace StringCalculator
             }
 
             // req2
-            if (int.TryParse(input, out var singleNumber))
+            if (int.TryParse(input, out var singleNumber) && IsKOrLess(singleNumber))
             {
-                return CheckIsNegative(singleNumber);
+                return ThrowIfNegative(singleNumber);
             }
 
             // req 3, 4 & 5
@@ -44,7 +42,7 @@ namespace StringCalculator
                     {
                         if (int.TryParse(n, out var number))
                         {
-                            return CheckIsNegative(number);
+                            return IsKOrLess(number) ? ThrowIfNegative(number) : 0;
                         }
 
                         throw new InvalidOperationException();
@@ -55,6 +53,9 @@ namespace StringCalculator
         }
 
         // req 6
-        private int CheckIsNegative(int number) => number < 0 ? throw new InvalidOperationException() : number;
+        private int ThrowIfNegative(int number) => number < 0 ? throw new InvalidOperationException() : number;
+
+        // req 7
+        private bool IsKOrLess(int number) => number <= 1000;
     }
 }

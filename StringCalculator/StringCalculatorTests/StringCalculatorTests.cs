@@ -64,7 +64,7 @@ namespace StringCalculatorTests
 
         [TestCase(1, 5)]
         [TestCase(6, 32)]
-        [TestCase(9020, 223)]
+        [TestCase(920, 223)]
         public void Calculate_GivenTwoCommaSeparatedNumbers_ReturnsSum(int input1, int input2)
         {
             Assert.AreEqual(input1 + input2, _calculator.Calculate($"{input1},{input2}"));
@@ -72,7 +72,7 @@ namespace StringCalculatorTests
 
         [TestCase(1, 5)]
         [TestCase(6, 32)]
-        [TestCase(9020, 223)]
+        [TestCase(920, 223)]
         public void Calculate_GivenTwoNewLineSeparatedNumbers_ReturnsSum(int input1, int input2)
         {
             Assert.AreEqual(input1 + input2, _calculator.Calculate($"{input1}{Environment.NewLine}{input2}"));
@@ -80,12 +80,22 @@ namespace StringCalculatorTests
 
         [TestCase(1, 5, 9, true)]
         [TestCase(6, 32, 2)]
-        [TestCase(9020, 223, 1035, true)]
-        [TestCase(3063, 273, 5)]
+        [TestCase(220, 223, 935, true)]
+        [TestCase(363, 273, 5)]
         public void Calculate_GivenThreeNewLineOrCommaSeparatedNumbers_ReturnsSum(int input1, int input2, int input3, bool useComma = false)
         {
             var separator = useComma ? "," : Environment.NewLine;
             Assert.AreEqual(input1 + input2 + input3, _calculator.Calculate($"{input1}{separator}{input2}{separator}{input3}"));
+        }
+
+        [Test]
+        public void Calculate_IgnoresNumbersOver1000()
+        {
+            var lessThanAK1 = 5;
+            var lessThanAK2 = 273;
+
+            Assert.AreEqual(lessThanAK1 + lessThanAK2, _calculator.Calculate($"{lessThanAK1},{lessThanAK2},{4078}"));
+            Assert.AreEqual(lessThanAK1 + lessThanAK2, _calculator.Calculate($"{lessThanAK1}{Environment.NewLine}{4078}{Environment.NewLine}{lessThanAK2}"));
         }
     }
 }
