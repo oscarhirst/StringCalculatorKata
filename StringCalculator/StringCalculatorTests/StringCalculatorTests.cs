@@ -40,6 +40,14 @@ namespace StringCalculatorTests
             Assert.Throws(typeof(InvalidOperationException), () => { _calculator.Calculate($"10{Environment.NewLine}123,1024,900002"); });
         }
 
+        [TestCase("-2")]
+        [TestCase("5,-6,200")]
+        [TestCase("1000NL-3004NL-256")]
+        public void Calculate_GivenANegativeNumber_ThrowsInvalidOperationException(string input)
+        {
+            Assert.Throws(typeof(InvalidOperationException), () => { _calculator.Calculate(input.Replace("NL", Environment.NewLine)); });
+        }
+
         [Test]
         public void Calculate_GivenEmptyString_Returns0()
         {

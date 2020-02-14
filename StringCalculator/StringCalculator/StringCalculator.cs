@@ -3,6 +3,8 @@
 // </copyright>
 // based on exercise http://www.peterprovost.org/blog/2012/05/02/kata-the-only-way-to-learn-tdd/
 
+using System.Net.Cache;
+
 namespace StringCalculator
 {
     using System;
@@ -21,7 +23,7 @@ namespace StringCalculator
             // req2
             if (int.TryParse(input, out var singleNumber))
             {
-                return singleNumber;
+                return CheckIsNegative(singleNumber);
             }
 
             // req 3, 4 & 5
@@ -40,16 +42,19 @@ namespace StringCalculator
                 return input.Split(new string[] { separator }, StringSplitOptions.None)
                     .Select(n =>
                     {
-                        if (!int.TryParse(n, out var number))
+                        if (int.TryParse(n, out var number))
                         {
-                            throw new InvalidOperationException();
+                            return CheckIsNegative(number);
                         }
 
-                        return number;
+                        throw new InvalidOperationException();
                     }).Sum();
             }
 
             throw new InvalidOperationException();
         }
+
+        // req 6
+        private int CheckIsNegative(int number) => number < 0 ? throw new InvalidOperationException() : number;
     }
 }
